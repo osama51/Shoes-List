@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/loginFragment3">
+    <fragment
+        android:id="@+id/loginFragment3"
+        android:name="com.example.shoestore_starter.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment3_to_onboardingFragment1"
+            app:destination="@id/onboardingFragment1"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loginFragment3_to_shoeListFragment"
+            app:destination="@id/shoeListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingFragment1"
+        android:name="com.example.shoestore_starter.OnboardingFragment1"
+        android:label="fragment_onboarding1"
+        tools:layout="@layout/fragment_onboarding1" >
+        <action
+            android:id="@+id/action_onboardingFragment1_to_onboardingFragment2"
+            app:destination="@id/onboardingFragment2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboardingFragment2"
+        android:name="com.example.shoestore_starter.OnboardingFragment2"
+        android:label="fragment_onboarding2"
+        tools:layout="@layout/fragment_onboarding2" >
+        <action
+            android:id="@+id/action_onboardingFragment2_to_shoeListFragment"
+            app:destination="@id/shoeListFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/loginFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoeListFragment"
+        android:name="com.example.shoestore_starter.ShoeListFragment"
+        android:label="fragment_shoe_list"
+        tools:layout="@layout/fragment_shoe_list" >
+        <action
+            android:id="@+id/action_shoeListFragment_to_shoesDetailsFragment"
+            app:destination="@id/shoesDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/shoesDetailsFragment"
+        android:name="com.example.shoestore_starter.ShoesDetailsFragment"
+        android:label="fragment_shoes_details"
+        tools:layout="@layout/fragment_shoes_details" >
+        <action
+            android:id="@+id/action_shoesDetailsFragment_to_shoeListFragment"
+            app:destination="@id/shoeListFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/loginFragment3" />
+    </fragment>
+</navigation>

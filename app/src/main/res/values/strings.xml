@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ShoeStore</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="email_text">Email</string>
+    <string name="email_hint">yourname@example.com</string>
+    <string name="loginbutton_text">Login</string>
+    <string name="or_text">Or</string>
+    <string name="registerbutton_text">Register</string>
+    <string name="password_text">Password</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="next">Next</string>
+    <string name="done">Done</string>
+    <string name="log_out">Log Out</string>
+    <string name="to_your_shoezie_store">To your Shoezie Store</string>
+    <string name="shoe_company">Shoe Company</string>
+    <string name="shoe_name">Shoe Name</string>
+    <string name="shoe_description">Shoe Description</string>
+    <string name="shoe_size">Shoe Size</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="add_shoes">Add Shoes</string>
+</resources>
