@@ -1,6 +1,7 @@
 package com.example.shoestore_starter
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -42,120 +43,117 @@ class ShoeListFragment : Fragment() {
 
         viewModel = ViewModelProvider(requireActivity())[ShoeDetailViewModel::class.java]
 
-        viewModel.flag.observe(viewLifecycleOwner, Observer{
-            val myLinearLayout: LinearLayout = binding.shoesListLinearlayout
+        viewModel.flag.observe(viewLifecycleOwner, Observer {
 
-            // another way to get params from a ref view
-//        val tempCard = binding.templateCarView
-//        val layoutParams: ViewGroup.LayoutParams = tempCard!!.layoutParams
+            for (i in 0 until viewModel.shoesList.size) {
 
-            val myShoeCard = LinearLayout(activity)
-            myShoeCard.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-            myShoeCard.isClickable = true
-            myShoeCard.isFocusable = true
-            var padding = dpToPx(10)
-            myShoeCard.setPadding(padding, padding, padding, padding)
+                val myLinearLayout: LinearLayout = binding.shoesListLinearlayout
+                var padding = dpToPx(10)
+                var cardHeight = dpToPx(100)
+                var cardMargin = dpToPx(5)
 
-            var cardHeight = dpToPx(100)
-            var cardMargin = dpToPx(5)
+                // another way to get params from a ref view
+                // val tempCard = binding.templateCarView
+                // val layoutParams: ViewGroup.LayoutParams = tempCard!!.layoutParams
 
-            myShoeCard.layoutParams.height = cardHeight.toInt()
-            setMargins(myShoeCard, cardMargin, cardMargin, cardMargin, cardMargin)
-            myShoeCard.background = ContextCompat.getDrawable(context!!, R.drawable.card_background)
-            myShoeCard.orientation = LinearLayout.HORIZONTAL
+                // Create the element
+                val myShoeCard = LinearLayout(activity)
+                myShoeCard.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                myShoeCard.layoutParams.height = cardHeight
+                myShoeCard.setPadding(padding, padding, padding, padding)
+                setMargins(myShoeCard, cardMargin, cardMargin, cardMargin, cardMargin)
 
-            val myShoeData = LinearLayout(activity)
-            myShoeData.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-            setMargins(myShoeData, 50, 0, 20, 0)
-            myShoeData.orientation = LinearLayout.VERTICAL
+                myShoeCard.background =
+                    ContextCompat.getDrawable(context!!, R.drawable.card_background)
+                myShoeCard.orientation = LinearLayout.HORIZONTAL
 
-            val shoeName = TextView(activity)
-            shoeName.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            shoeName.setPadding(0, 0, 0, dpToPx(2))
+                val myShoeData = LinearLayout(activity)
+                myShoeData.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                setMargins(myShoeData, 50, 0, 20, 0)
+                myShoeData.orientation = LinearLayout.VERTICAL
 
-            val shoeCompany = TextView(activity)
-            shoeCompany.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
+                val shoeName = TextView(activity)
+                shoeName.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
 
-            shoeCompany.setPadding(0, 0, 0, dpToPx(2))
+                val shoeCompany = TextView(activity)
+                shoeCompany.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
 
-            val shoeSize = TextView(activity)
-            shoeSize.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            shoeSize.setPadding(0, 0, 0, dpToPx(2))
+                val shoeSize = TextView(activity)
+                shoeSize.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
 
-            val shoeDescription = TextView(activity)
-            shoeDescription.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
+                val shoeDescription = TextView(activity)
+                shoeDescription.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                )
 
-            shoeName.setTextColor(Color.parseColor("#000000"))
-            shoeCompany.setTextColor(Color.parseColor("#000000"))
-            shoeSize.setTextColor(Color.parseColor("#000000"))
-            shoeDescription.setTextColor(Color.parseColor("#000000"))
+                var arrayOfTextViews: Array<TextView> = arrayOf(shoeName, shoeCompany, shoeSize, shoeDescription)
 
-            val shoeCard = activity?.let { CardView(it) }
-            shoeCard?.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-            shoeCard?.layoutParams?.height = dpToPx(80)
-            shoeCard?.layoutParams?.width = dpToPx(80)
-            shoeCard?.radius = dpToPx(10).toFloat()
+                for (i in arrayOfTextViews){
+                    i.setTextColor(Color.parseColor("#FFFFFF"))
+                    i.setPadding(0, 0, 0, dpToPx(2))
+                    i.setTypeface(null, Typeface.BOLD);
+                }
 
-            val shoeCardImage = ImageView(activity)
-            shoeCardImage.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-            )
-//        shoeCardImage.layoutParams.height = dpToPx(90)
-//        shoeCardImage.layoutParams.width = dpToPx(90)
-            shoeCardImage.setBackgroundColor(Color.parseColor("#FFFFFF"))
-            shoeCardImage.setImageResource(R.drawable.ic_shoe_)
-            shoeCardImage.background = ContextCompat.getDrawable(context!!, R.drawable.shoe_corners)
+                val shoeCard = activity?.let { CardView(it) }
+                shoeCard?.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                shoeCard?.layoutParams?.height = dpToPx(80)
+                shoeCard?.layoutParams?.width = dpToPx(80)
+                shoeCard?.radius = dpToPx(10).toFloat()
+
+                val shoeCardImage = ImageView(activity)
+                shoeCardImage.layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+                )
+                shoeCardImage.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                shoeCardImage.setImageResource(R.drawable.ic_shoe_)
+                shoeCardImage.background =
+                    ContextCompat.getDrawable(context!!, R.drawable.shoe_corners)
 
 
-            /* ########## DON'T MIND ME #############
+                /* ########## DON'T MIND ME #############
 
-            // for later reference
-    //        myShoe.setBackgroundColor(Color.parseColor("#000000"))
-    //        myShoe.setBackgroundColor(ContextCompat.getDrawable(context, R.drawable.card_background))
-    //        myShoe.background = Drawable.createFromPath("@drawable/card_background")
+                // for later reference
+                myShoe.setBackgroundColor(Color.parseColor("#000000"))
+                myShoe.setBackgroundColor(ContextCompat.getDrawable(context, R.drawable.card_background))
+                myShoe.background = Drawable.createFromPath("@drawable/card_background")
 
-            ######################################### */
+                ######################################### */
 
-//        myShoe.setTextColor(
-//            Color.parseColor("#bdbdbd"))
-//
+                shoeName.text = ("Name: " + viewModel.shoesList[i].name) ?: ""
+                shoeCompany.text = ("Company: " + viewModel.shoesList[i].company) ?: ""
+                shoeSize.text = "Size: " + viewModel.shoesList[i].size.toString()
+                shoeDescription.text = ("Description: " + viewModel.shoesList[i].description) ?: ""
 
-            shoeName.text = ("Name: " + viewModel.newShoe.value?.name) ?: ""
-            shoeCompany.text = ("Company: " + viewModel.newShoe.value?.company) ?: ""
-            shoeSize.text = "Size: " +viewModel.newShoe.value?.size.toString()
-            shoeDescription.text = ("Description: " + viewModel.newShoe.value?.description) ?: ""
+                myLinearLayout.addView(myShoeCard)
+                myShoeCard.addView(shoeCard)
+                myShoeCard.addView(myShoeData)
+                myShoeData.addView(shoeName)
+                myShoeData.addView(shoeCompany)
+                myShoeData.addView(shoeSize)
+                myShoeData.addView(shoeDescription)
+                shoeCard?.addView(shoeCardImage)
 
-            myLinearLayout.addView(myShoeCard)
-            myShoeCard.addView(shoeCard)
-            myShoeCard.addView(myShoeData)
-            myShoeData.addView(shoeName)
-            myShoeData.addView(shoeCompany)
-            myShoeData.addView(shoeSize)
-            myShoeData.addView(shoeDescription)
-            shoeCard?.addView(shoeCardImage)
-
+            }
         })
 
         return binding.root

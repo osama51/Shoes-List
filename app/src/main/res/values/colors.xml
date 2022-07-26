@@ -15,4 +15,8 @@
     <color name="colorPrimaryDark">#4b2b6e</color>
     <color name="colorAccent">#ad184f</color>
     <color name="cardColor">#F6DCF6</color>
+    <color name="cardColor2">#7C45B9</color>
+    <color name="cardColor3">#A387C1</color>
+
+
 </resources>
