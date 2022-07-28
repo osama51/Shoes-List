@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".OnboardingFragment1">
 
+    <!--    Constraint layout was used to simplify the positioning and alignment of the child elements-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/login_background">
 
+<!--        A vertical Linearlayout that contains 3 TextViews-->
         <LinearLayout
             android:id="@+id/view"
             android:layout_width="match_parent"

@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".OnboardingFragment2">
 
+<!--    Constraint layout was used to simplify the positioning and alignment of the child elements-->
+<!--    and those are the vertical LinearLayout for the instructions and the Button -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout3"
         android:layout_width="match_parent"
@@ -72,18 +74,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/instruction6" />
 
-            <!--            <TextView-->
-            <!--                android:id="@+id/onboarding2Text"-->
-            <!--                style="@style/onboarding_style"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent"-->
-            <!--                android:layout_marginTop="160dp"-->
-            <!--                android:clickable="true"-->
-            <!--                android:focusable="true"-->
-            <!--                android:lineSpacingExtra="20dp"-->
-            <!--                android:padding="50dp"-->
-            <!--                android:text="@string/onboarding2"-->
-            <!--                android:textAlignment="center" />-->
         </LinearLayout>
 
         <Button

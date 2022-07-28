@@ -11,6 +11,8 @@
             android:background="@color/white"
             >
 
+<!--        stupid trials of having the AppBarLayout and toolbar only in one fragment  -->
+
 <!--            <com.google.android.material.appbar.AppBarLayout-->
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="wrap_content"-->
@@ -24,10 +26,10 @@
 <!--                    app:popupTheme="@style/AppTheme.PopupOverlay"-->
 <!--                    app:title="Shoes List"-->
 <!--                   />-->
-
-
 <!--            </com.google.android.material.appbar.AppBarLayout>-->
 
+
+<!--     added this guideline to have fake border that resembles the Toolbar bottom edge  -->
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline2"
                 android:layout_width="wrap_content"

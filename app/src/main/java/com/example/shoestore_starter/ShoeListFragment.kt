@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.*
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -14,12 +17,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import com.example.shoestore_starter.databinding.FragmentShoeListBinding
 import com.example.shoestore_starter.modeks.ShoeDetailViewModel
 
@@ -79,7 +77,7 @@ class ShoeListFragment : Fragment() {
                  *      Starting from here, we are addViewing
                  *      until you hit "return binding.root"         */
 
-                // Create the element
+                /** Create the model outer Layout, which contains 2 columns (img column + info column) */
                 val myShoeCard = LinearLayout(activity)
                 myShoeCard.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -93,6 +91,7 @@ class ShoeListFragment : Fragment() {
                     ContextCompat.getDrawable(context!!, R.drawable.card_background)
                 myShoeCard.orientation = LinearLayout.HORIZONTAL
 
+                /** Create a vertical Linearlayout that holds the data of the shoe model */
                 val myShoeData = LinearLayout(activity)
                 myShoeData.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -101,6 +100,7 @@ class ShoeListFragment : Fragment() {
                 setMargins(myShoeData, 50, 0, 20, 0)
                 myShoeData.orientation = LinearLayout.VERTICAL
 
+                /** 4 Textviews for the data to be displayed */
                 val shoeName = TextView(activity)
                 shoeName.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -125,6 +125,7 @@ class ShoeListFragment : Fragment() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 )
 
+                /** Setting common attributes to all 4 Textviews */
                 var arrayOfTextViews: Array<TextView> = arrayOf(shoeName, shoeCompany, shoeSize, shoeDescription)
 
                 for (i in arrayOfTextViews){
@@ -133,6 +134,7 @@ class ShoeListFragment : Fragment() {
                     i.setTypeface(null, Typeface.BOLD);
                 }
 
+                /**  added a cardview to have a round cornered image */
                 val shoeCard = activity?.let { CardView(it) }
                 shoeCard?.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -142,6 +144,7 @@ class ShoeListFragment : Fragment() {
                 shoeCard?.layoutParams?.width = dpToPx(80)
                 shoeCard?.radius = dpToPx(10).toFloat()
 
+                /** The image to be added to the CardView*/
                 val shoeCardImage = ImageView(activity)
                 shoeCardImage.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -162,11 +165,13 @@ class ShoeListFragment : Fragment() {
 
                 ######################################### */
 
+                /** i is an iterator from the for loop above, which iterates over the shoelist elements */
                 shoeName.text = ("Name: " + viewModel.shoesList[i].name) ?: ""
                 shoeCompany.text = ("Company: " + viewModel.shoesList[i].company) ?: ""
                 shoeSize.text = "Size: " + viewModel.shoesList[i].size.toString()
                 shoeDescription.text = ("Description: " + viewModel.shoesList[i].description) ?: ""
 
+                /** putting everything together */
                 myLinearLayout.addView(myShoeCard)
                 myShoeCard.addView(shoeCard)
                 myShoeCard.addView(myShoeData)
@@ -198,6 +203,9 @@ class ShoeListFragment : Fragment() {
         }
     }
 
+    /** I first was trying to create the toolbar only in the shoe list screen (lines 54 - 59 and 198 - 206)
+     * which took forever just trying to figure out why I'm doing this in the first place instead of adding it to the main activity,
+     * finally I decided to add it back to the main activity while using hide() and show() methods  */
     override fun onResume() {
         super.onResume();
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
@@ -208,6 +216,7 @@ class ShoeListFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
+    /** converts dp units to pixels.. since adding view dynamically takes args in pixels*/
     private fun dpToPx(value: Int): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -217,6 +226,7 @@ class ShoeListFragment : Fragment() {
 
     }
 
+    /** a nice function that saves you 4 assignments of margins for every single view by gathering all margins in one function*/
     // reference: https://stackoverflow.com/questions/12728255/in-android-how-do-i-set-margins-in-dp-programmatically#:~:text=148-,Best%20way%20ever%3A,-private%20void%20setMargins
     private fun setMargins(view: View, left: Int, top: Int, right: Int, bottom: Int) {
         if (view.layoutParams is MarginLayoutParams) {

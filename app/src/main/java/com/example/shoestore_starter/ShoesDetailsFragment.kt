@@ -33,13 +33,10 @@ class ShoesDetailsFragment : Fragment() {
         var str_size_to_double = 0.0
 
         binding.saveButton.setOnClickListener {
+            /** had to use this condition when Elvis operator was persistent to cause a crash if the Double field was left empty */
             str_size_to_double = when (binding.shoeSizeEdit.text.toString()) {
-                "" -> {
-                    0.0
-                }
-                else -> {
-                    binding.shoeSizeEdit.text.toString().toDouble()
-                }
+                "" -> { 0.0 }
+                else -> { binding.shoeSizeEdit.text.toString().toDouble() }
             }
             viewModel.addShoe(
                 binding.shoeNameEdit.text.toString() ?: "",
@@ -47,10 +44,10 @@ class ShoesDetailsFragment : Fragment() {
                 binding.shoeCompEdit.text.toString() ?: "",
                 binding.shoeDescriptionEdit.text.toString() ?: ""
             )
-
             view?.findNavController()
                 ?.navigate(ShoesDetailsFragmentDirections.actionShoesDetailsFragmentToShoeListFragment())
         }
+
         binding.cancelButton.setOnClickListener {
             view?.findNavController()
                 ?.navigateUp()
