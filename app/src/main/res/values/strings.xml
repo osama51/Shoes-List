@@ -29,4 +29,11 @@
     <string name="add_shoes">Add Shoes</string>
     <string name="assume_there_s_some_text_here">Assume there\'s some text here</string>
     <string name="onboarding2">This is a second onboarding screen that has absolutely nothing to do and nothing to show</string>
+    <string name="instructions">Instructions</string>
+    <string name="instruction1">1. Once you click on Let\'s Start it throws you to the Shoes List screen</string>
+    <string name="instruction2">2. Click on the round shaped button to add info for a new shoe</string>
+    <string name="instruction3">3. Clicking Save adds your data, while choosing Cancel will omit any info added and navigate back to the Shoes List screen</string>
+    <string name="instruction4">4. You\'ll be able to log out of your non existent account only through one screen, Shoes List</string>
+    <string name="instruction5">5. It is possible to leave the edit fields empty, we\'ve got your back</string>
+    <string name="instruction6">6. It\'s worth noting that Register always goes through the welcoming screens while Login skips them</string>
 </resources>

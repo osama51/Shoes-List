@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -28,7 +29,7 @@ class OnboardingFragment2 : Fragment() {
                 ?.navigate(OnboardingFragment2Directions.actionOnboardingFragment2ToShoeListFragment())
         }
 
-        binding.onboarding2Text.setOnClickListener{
+        binding.instrcution3Text.setOnClickListener{
             Toast.makeText(activity, "I swear there's text here!!", Toast.LENGTH_SHORT).show()
         }
         return binding.root

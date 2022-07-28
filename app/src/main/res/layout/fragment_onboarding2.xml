@@ -22,17 +22,68 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/onboarding2Text"
+                android:id="@+id/instructionsText"
                 style="@style/onboarding_style"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clickable="true"
-                android:focusable="true"
-                android:text="@string/onboarding2"
-                android:textAlignment="center"
-                android:layout_marginTop="160dp"
-                android:padding="50dp"
-                android:lineSpacingExtra="20dp"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/instructions"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/instrcution1Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction1" />
+
+            <TextView
+                android:id="@+id/instrcution2Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction2" />
+
+            <TextView
+                android:id="@+id/instrcution3Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction3" />
+
+            <TextView
+                android:id="@+id/instrcutionsin4Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction4" />
+
+            <TextView
+                android:id="@+id/instrcution5Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction5" />
+
+            <TextView
+                android:id="@+id/instrcution6Text"
+                style="@style/instructions_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/instruction6" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/onboarding2Text"-->
+            <!--                style="@style/onboarding_style"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginTop="160dp"-->
+            <!--                android:clickable="true"-->
+            <!--                android:focusable="true"-->
+            <!--                android:lineSpacingExtra="20dp"-->
+            <!--                android:padding="50dp"-->
+            <!--                android:text="@string/onboarding2"-->
+            <!--                android:textAlignment="center" />-->
         </LinearLayout>
 
         <Button

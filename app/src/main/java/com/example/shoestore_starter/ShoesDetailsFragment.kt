@@ -30,13 +30,22 @@ class ShoesDetailsFragment : Fragment() {
         Log.i("ShoeDetailViewModel", "ViewModelProvider called!")
         viewModel = ViewModelProvider(requireActivity())[ShoeDetailViewModel::class.java]
 
+        var str_size_to_double = 0.0
 
         binding.saveButton.setOnClickListener {
+            str_size_to_double = when (binding.shoeSizeEdit.text.toString()) {
+                "" -> {
+                    0.0
+                }
+                else -> {
+                    binding.shoeSizeEdit.text.toString().toDouble()
+                }
+            }
             viewModel.addShoe(
-                binding.shoeNameEdit.text.toString()?: "",
-                binding.shoeSizeEdit.text.toString().toDouble()?: 0.0,
-                binding.shoeCompEdit.text.toString()?: "",
-                binding.shoeDescriptionEdit.text.toString()?: ""
+                binding.shoeNameEdit.text.toString() ?: "",
+                str_size_to_double,
+                binding.shoeCompEdit.text.toString() ?: "",
+                binding.shoeDescriptionEdit.text.toString() ?: ""
             )
 
             view?.findNavController()
