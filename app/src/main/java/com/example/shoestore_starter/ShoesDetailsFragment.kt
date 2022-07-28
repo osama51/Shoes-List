@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -25,19 +26,18 @@ class ShoesDetailsFragment : Fragment() {
         val binding: FragmentShoesDetailsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_shoes_details, container, false)
 
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         Log.i("ShoeDetailViewModel", "ViewModelProvider called!")
         viewModel = ViewModelProvider(requireActivity())[ShoeDetailViewModel::class.java]
 
 
         binding.saveButton.setOnClickListener {
             viewModel.addShoe(
-                binding.shoeNameEdit.text.toString(),
-                binding.shoeSizeEdit.text.toString().toDouble(),
-                binding.shoeCompEdit.text.toString(),
-                binding.shoeDescriptionEdit.text.toString()
+                binding.shoeNameEdit.text.toString()?: "",
+                binding.shoeSizeEdit.text.toString().toDouble()?: 0.0,
+                binding.shoeCompEdit.text.toString()?: "",
+                binding.shoeDescriptionEdit.text.toString()?: ""
             )
-            viewModel.flag.value = true
-//            viewModel.flag.value = !viewModel.flag.value!!
 
             view?.findNavController()
                 ?.navigate(ShoesDetailsFragmentDirections.actionShoesDetailsFragmentToShoeListFragment())

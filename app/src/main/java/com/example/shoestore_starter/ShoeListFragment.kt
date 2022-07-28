@@ -4,23 +4,25 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.ViewGroup.MarginLayoutParams
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.example.shoestore_starter.databinding.FragmentShoeListBinding
 import com.example.shoestore_starter.modeks.ShoeDetailViewModel
+
 
 class ShoeListFragment : Fragment() {
 
@@ -31,19 +33,34 @@ class ShoeListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_shoe_list, container, false)
 
+
+        setHasOptionsMenu(true)
         binding.addFloatingButton.setOnClickListener {
             view?.findNavController()
                 ?.navigate(ShoeListFragmentDirections.actionShoeListFragmentToShoesDetailsFragment())
             Toast.makeText(activity, "You Pressed Me", Toast.LENGTH_SHORT).show()
         }
 
+        /**     to implement a menu in a specific fragment
+         *      and not in an activity .. I had my toolbar
+         *      moved to a fragment, so I couldn't use
+         *      setSupportActionBar(binding.toolbar)        */
+
+////         reference: https://stackoverflow.com/questions/8308695/how-to-add-options-menu-to-fragment-in-android#:~:text=onOptionsItemSelected(it)%0A%7D-,Standalone%20Toolbar,-Most%20of%20the
+//        val toolbar = binding.toolbar
+//        toolbar.inflateMenu(R.menu.overflow_menu)
+//        toolbar.setOnMenuItemClickListener {
+//            onOptionsItemSelected(it)
+//        }
+
         viewModel = ViewModelProvider(requireActivity())[ShoeDetailViewModel::class.java]
 
-        viewModel.flag.observe(viewLifecycleOwner, Observer {
+        viewModel.newShoe.observe(viewLifecycleOwner, Observer {
 
             for (i in 0 until viewModel.shoesList.size) {
 
@@ -52,9 +69,15 @@ class ShoeListFragment : Fragment() {
                 var cardHeight = dpToPx(100)
                 var cardMargin = dpToPx(5)
 
-                // another way to get params from a ref view
+                /** another way to get params from a ref view */
                 // val tempCard = binding.templateCarView
                 // val layoutParams: ViewGroup.LayoutParams = tempCard!!.layoutParams
+
+
+
+                /**
+                 *      Starting from here, we are addViewing
+                 *      until you hit "return binding.root"         */
 
                 // Create the element
                 val myShoeCard = LinearLayout(activity)
@@ -130,7 +153,7 @@ class ShoeListFragment : Fragment() {
                     ContextCompat.getDrawable(context!!, R.drawable.shoe_corners)
 
 
-                /* ########## DON'T MIND ME #############
+                /** ########## DON'T MIND ME #############
 
                 // for later reference
                 myShoe.setBackgroundColor(Color.parseColor("#000000"))
@@ -156,9 +179,34 @@ class ShoeListFragment : Fragment() {
             }
         })
 
+
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.overflow_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.log_out_menu_item -> {
+                view?.findNavController()?.navigate(ShoeListFragmentDirections.actionShoeListFragmentToLoginFragment())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume();
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.title = "Shoes List"
+    }
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
 
     private fun dpToPx(value: Int): Int {
         return TypedValue.applyDimension(
@@ -177,5 +225,6 @@ class ShoeListFragment : Fragment() {
             view.requestLayout()
         }
     }
+
 }
 

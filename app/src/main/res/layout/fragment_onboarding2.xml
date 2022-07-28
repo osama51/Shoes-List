@@ -16,18 +16,23 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="20dp"
-            android:layout_weight="5"
             android:background="@drawable/subonboarding2_background"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/onboarding2Button"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/onboarding2Text"
+                style="@style/onboarding_style"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="@string/onboarding2"
+                android:textAlignment="center"
+                android:layout_marginTop="160dp"
+                android:padding="50dp"
+                android:lineSpacingExtra="20dp"/>
         </LinearLayout>
 
         <Button
@@ -39,7 +44,7 @@
             android:padding="20dp"
             android:paddingStart="50dp"
             android:paddingEnd="50dp"
-            android:text="@string/done"
+            android:text="@string/let_s_start"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

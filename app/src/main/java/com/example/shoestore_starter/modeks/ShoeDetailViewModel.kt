@@ -9,7 +9,7 @@ class ShoeDetailViewModel: ViewModel() {
     val newShoe = MutableLiveData<Shoe>()
     val flag = MutableLiveData<Boolean>()
 
-    lateinit var shoesList: MutableList<Shoe>
+    var shoesList: MutableList<Shoe>
 
     init{
         Log.i("ShoeDetailViewModel", "ShoeDetailViewModel Created")
@@ -27,13 +27,8 @@ class ShoeDetailViewModel: ViewModel() {
         addToList(newShoe.value!!)
     }
 
-    fun addToList(newShoe: Shoe){
+    private fun addToList(newShoe: Shoe){
         shoesList.add(newShoe)
     }
 
-    fun iterateList(){
-        for(i in 0 until shoesList.size){
-
-        }
-    }
 }

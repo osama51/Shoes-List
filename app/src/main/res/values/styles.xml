@@ -6,4 +6,12 @@
         <item name="android:padding">10dp</item>
         <item name="android:textColor">@color/black</item>
     </style>
+
+    <style name="onboarding_style">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">15sp</item>
+    </style>
 </resources>

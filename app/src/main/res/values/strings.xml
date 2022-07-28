@@ -17,7 +17,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="next">Next</string>
-    <string name="done">Done</string>
+    <string name="let_s_start">Let\'s Start</string>
     <string name="log_out">Log Out</string>
     <string name="to_your_shoezie_store">To your Shoezie Store</string>
     <string name="shoe_company">Shoe Company</string>
@@ -27,4 +27,6 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
     <string name="add_shoes">Add Shoes</string>
+    <string name="assume_there_s_some_text_here">Assume there\'s some text here</string>
+    <string name="onboarding2">This is a second onboarding screen that has absolutely nothing to do and nothing to show</string>
 </resources>

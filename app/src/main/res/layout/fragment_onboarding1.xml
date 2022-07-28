@@ -44,11 +44,16 @@
                 android:id="@+id/shoeziestoreText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
                 android:text="@string/to_your_shoezie_store"
-                android:textAlignment="center"
-                android:textAllCaps="true"
-                android:textColor="@color/black" />
+                style="@style/onboarding_style" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/assume_there_s_some_text_here"
+                style="@style/onboarding_style"
+                android:layout_marginTop="200dp"/>
         </LinearLayout>
 
         <Button

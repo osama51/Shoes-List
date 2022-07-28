@@ -15,6 +15,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            >
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Shoes List"/>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/myNavHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -23,7 +40,7 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation"
             android:clickable="true"
-            android:focusableInTouchMode="true"/>
+            android:focusable="true"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -32,6 +49,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/navdrawer_menu" />
+            app:menu="@menu/navdrawer" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
