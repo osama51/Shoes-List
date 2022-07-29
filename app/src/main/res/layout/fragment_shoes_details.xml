@@ -5,6 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ShoesDetailsFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.shoestore_starter.ActivityViewModel" />
+    </data>
+
     <!--    Constraint layout was used to simplify the positioning and alignment of the child elements-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout4"
@@ -61,6 +67,7 @@
             android:layout_marginBottom="28dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:text="@={viewModel.name}"
             app:layout_constraintBottom_toTopOf="@+id/shoe_comp_edit"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -74,6 +81,7 @@
             android:layout_marginBottom="32dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:text="@={viewModel.company}"
             app:layout_constraintBottom_toTopOf="@+id/shoe_size_edit"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -84,6 +92,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="number"
+            android:text="@={viewModel.size}"
             app:layout_constraintBottom_toTopOf="@+id/cancel_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -98,6 +107,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:inputType="textMultiLine"
+            android:text="@={viewModel.description}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/shoe_size_edit"

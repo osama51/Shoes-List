@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ShoeListFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.shoestore_starter.ActivityViewModel" />
+    </data>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/shoe_list_screen"
             android:layout_width="match_parent"

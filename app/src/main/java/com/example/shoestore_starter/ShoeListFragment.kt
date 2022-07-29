@@ -19,12 +19,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.shoestore_starter.databinding.FragmentShoeListBinding
-import com.example.shoestore_starter.modeks.ShoeDetailViewModel
 
 
 class ShoeListFragment : Fragment() {
 
-    private lateinit var viewModel: ShoeDetailViewModel
+    private lateinit var viewModel: ActivityViewModel
     private lateinit var binding: FragmentShoeListBinding
 
     override fun onCreateView(
@@ -56,131 +55,139 @@ class ShoeListFragment : Fragment() {
 //            onOptionsItemSelected(it)
 //        }
 
-        viewModel = ViewModelProvider(requireActivity())[ShoeDetailViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[ActivityViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.newShoe.observe(viewLifecycleOwner, Observer {
+        viewModel.flag.observe(viewLifecycleOwner, Observer {
 
-            for (i in 0 until viewModel.shoesList.size) {
+            for (i in viewModel.shoesList) {
+                if(viewModel.flag.value==true){
+                    val myLinearLayout: LinearLayout = binding.shoesListLinearlayout
+                    var padding = dpToPx(10)
+                    var cardHeight = dpToPx(100)
+                    var cardMargin = dpToPx(5)
 
-                val myLinearLayout: LinearLayout = binding.shoesListLinearlayout
-                var padding = dpToPx(10)
-                var cardHeight = dpToPx(100)
-                var cardMargin = dpToPx(5)
+                    /** another way to get params from a ref view */
+                    // val tempCard = binding.templateCarView
+                    // val layoutParams: ViewGroup.LayoutParams = tempCard!!.layoutParams
 
-                /** another way to get params from a ref view */
-                // val tempCard = binding.templateCarView
-                // val layoutParams: ViewGroup.LayoutParams = tempCard!!.layoutParams
+                    /**
+                     *      Starting from here, we are addViewing
+                     *      until you hit "return binding.root"         */
+
+                    /** Create the model outer Layout, which contains 2 columns (img column + info column) */
+                    val myShoeCard = LinearLayout(activity)
+                    myShoeCard.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                    myShoeCard.layoutParams.height = cardHeight
+                    myShoeCard.setPadding(padding, padding, padding, padding)
+                    setMargins(myShoeCard, cardMargin, cardMargin, cardMargin, cardMargin)
+
+                    myShoeCard.background =
+                        ContextCompat.getDrawable(context!!, R.drawable.card_background)
+                    myShoeCard.orientation = LinearLayout.HORIZONTAL
+
+                    /** Create a vertical Linearlayout that holds the data of the shoe model */
+                    val myShoeData = LinearLayout(activity)
+                    myShoeData.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                    setMargins(myShoeData, 50, 0, 20, 0)
+                    myShoeData.orientation = LinearLayout.VERTICAL
+
+                    /** 4 Textviews for the data to be displayed */
+                    val shoeName = TextView(activity)
+                    shoeName.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    val shoeCompany = TextView(activity)
+                    shoeCompany.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    val shoeSize = TextView(activity)
+                    shoeSize.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    val shoeDescription = TextView(activity)
+                    shoeDescription.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.WRAP_CONTENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+
+                    /** Setting common attributes to all 4 Textviews */
+                    var arrayOfTextViews: Array<TextView> = arrayOf(shoeName, shoeCompany, shoeSize, shoeDescription)
+
+                    for (i in arrayOfTextViews){
+                        i.setTextColor(Color.parseColor("#FFFFFF"))
+                        i.setPadding(0, 0, 0, dpToPx(2))
+                        i.setTypeface(null, Typeface.BOLD);
+                    }
+
+                    /**  added a cardview to have a round cornered image */
+                    val shoeCard = activity?.let { CardView(it) }
+                    shoeCard?.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                    shoeCard?.layoutParams?.height = dpToPx(80)
+                    shoeCard?.layoutParams?.width = dpToPx(80)
+                    shoeCard?.radius = dpToPx(10).toFloat()
+
+                    /** The image to be added to the CardView*/
+                    val shoeCardImage = ImageView(activity)
+                    shoeCardImage.layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.MATCH_PARENT
+                    )
+                    shoeCardImage.setBackgroundColor(Color.parseColor("#FFFFFF"))
+                    shoeCardImage.setImageResource(R.drawable.ic_shoe_)
+                    shoeCardImage.background =
+                        ContextCompat.getDrawable(context!!, R.drawable.shoe_corners)
 
 
+                    /** ########## DON'T MIND ME #############
 
-                /**
-                 *      Starting from here, we are addViewing
-                 *      until you hit "return binding.root"         */
+                    // for later reference
+                    myShoe.setBackgroundColor(Color.parseColor("#000000"))
+                    myShoe.setBackgroundColor(ContextCompat.getDrawable(context, R.drawable.card_background))
+                    myShoe.background = Drawable.createFromPath("@drawable/card_background")
 
-                /** Create the model outer Layout, which contains 2 columns (img column + info column) */
-                val myShoeCard = LinearLayout(activity)
-                myShoeCard.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                myShoeCard.layoutParams.height = cardHeight
-                myShoeCard.setPadding(padding, padding, padding, padding)
-                setMargins(myShoeCard, cardMargin, cardMargin, cardMargin, cardMargin)
+                    ######################################### */
 
-                myShoeCard.background =
-                    ContextCompat.getDrawable(context!!, R.drawable.card_background)
-                myShoeCard.orientation = LinearLayout.HORIZONTAL
+//                /** i is an iterator from the for loop above, which iterates over the shoelist elements */
+//                shoeName.text = ("Name: " + viewModel.shoesList[i].name.toString()) ?: ""
+//                shoeCompany.text = ("Company: " + viewModel.shoesList[i].company.toString()) ?: ""
+//                shoeSize.text = ("Size: " + viewModel.shoesList[i].size.toString()) ?: ""
+//                shoeDescription.text =
+//                    ("Description: " + viewModel.shoesList[i].description.toString()) ?: ""
 
-                /** Create a vertical Linearlayout that holds the data of the shoe model */
-                val myShoeData = LinearLayout(activity)
-                myShoeData.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                setMargins(myShoeData, 50, 0, 20, 0)
-                myShoeData.orientation = LinearLayout.VERTICAL
+                    /** i is an iterator from the for loop above, which iterates over the shoelist elements */
+                    shoeName.text = ("Name: " + i.name.toString()) ?: ""
+                    shoeCompany.text = ("Company: " + i.company.toString()) ?: ""
+                    shoeSize.text = ("Size: " + i.size.toString()) ?: ""
+                    shoeDescription.text =
+                        ("Description: " + i.description.toString()) ?: ""
 
-                /** 4 Textviews for the data to be displayed */
-                val shoeName = TextView(activity)
-                shoeName.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                val shoeCompany = TextView(activity)
-                shoeCompany.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                val shoeSize = TextView(activity)
-                shoeSize.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                val shoeDescription = TextView(activity)
-                shoeDescription.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                )
-
-                /** Setting common attributes to all 4 Textviews */
-                var arrayOfTextViews: Array<TextView> = arrayOf(shoeName, shoeCompany, shoeSize, shoeDescription)
-
-                for (i in arrayOfTextViews){
-                    i.setTextColor(Color.parseColor("#FFFFFF"))
-                    i.setPadding(0, 0, 0, dpToPx(2))
-                    i.setTypeface(null, Typeface.BOLD);
+                    /** putting everything together */
+                    myLinearLayout.addView(myShoeCard)
+                    myShoeCard.addView(shoeCard)
+                    myShoeCard.addView(myShoeData)
+                    myShoeData.addView(shoeName)
+                    myShoeData.addView(shoeCompany)
+                    myShoeData.addView(shoeSize)
+                    myShoeData.addView(shoeDescription)
+                    shoeCard?.addView(shoeCardImage)
                 }
-
-                /**  added a cardview to have a round cornered image */
-                val shoeCard = activity?.let { CardView(it) }
-                shoeCard?.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                shoeCard?.layoutParams?.height = dpToPx(80)
-                shoeCard?.layoutParams?.width = dpToPx(80)
-                shoeCard?.radius = dpToPx(10).toFloat()
-
-                /** The image to be added to the CardView*/
-                val shoeCardImage = ImageView(activity)
-                shoeCardImage.layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-                )
-                shoeCardImage.setBackgroundColor(Color.parseColor("#FFFFFF"))
-                shoeCardImage.setImageResource(R.drawable.ic_shoe_)
-                shoeCardImage.background =
-                    ContextCompat.getDrawable(context!!, R.drawable.shoe_corners)
-
-
-                /** ########## DON'T MIND ME #############
-
-                // for later reference
-                myShoe.setBackgroundColor(Color.parseColor("#000000"))
-                myShoe.setBackgroundColor(ContextCompat.getDrawable(context, R.drawable.card_background))
-                myShoe.background = Drawable.createFromPath("@drawable/card_background")
-
-                ######################################### */
-
-                /** i is an iterator from the for loop above, which iterates over the shoelist elements */
-                shoeName.text = ("Name: " + viewModel.shoesList[i].name) ?: ""
-                shoeCompany.text = ("Company: " + viewModel.shoesList[i].company) ?: ""
-                shoeSize.text = "Size: " + viewModel.shoesList[i].size.toString()
-                shoeDescription.text = ("Description: " + viewModel.shoesList[i].description) ?: ""
-
-                /** putting everything together */
-                myLinearLayout.addView(myShoeCard)
-                myShoeCard.addView(shoeCard)
-                myShoeCard.addView(myShoeData)
-                myShoeData.addView(shoeName)
-                myShoeData.addView(shoeCompany)
-                myShoeData.addView(shoeSize)
-                myShoeData.addView(shoeDescription)
-                shoeCard?.addView(shoeCardImage)
-
             }
         })
 
@@ -203,7 +210,7 @@ class ShoeListFragment : Fragment() {
         }
     }
 
-    /** I first was trying to create the toolbar only in the shoe list screen (lines 54 - 59 and 198 - 206)
+    /** I was first trying to create the toolbar only in the shoe list screen (lines 54 - 59 and 198 - 206)
      * which took forever just trying to figure out why I'm doing this in the first place instead of adding it to the main activity,
      * finally I decided to add it back to the main activity while using hide() and show() methods  */
     override fun onResume() {

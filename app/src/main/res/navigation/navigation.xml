@@ -65,7 +65,8 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_shoeListFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoesDetailsFragment"
