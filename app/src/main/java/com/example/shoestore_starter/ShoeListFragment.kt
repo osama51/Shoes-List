@@ -59,9 +59,9 @@ class ShoeListFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.flag.observe(viewLifecycleOwner, Observer {
+        viewModel.shoesList.observe(viewLifecycleOwner, Observer {
 
-            for (i in viewModel.shoesList) {
+            for (i in viewModel.shoesList.value!!) {
                 if(viewModel.flag.value==true){
                     val myLinearLayout: LinearLayout = binding.shoesListLinearlayout
                     var padding = dpToPx(10)
